@@ -11,16 +11,50 @@ if(!isset($_SESSION['username'])){
 <html>
 <head>
     <title>Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
+<div class="navbar">
 
-<h1>Welcome, <?php echo $_SESSION['username']; ?> 🎉</h1>
+    <div class="logo">
+        MyBlog
+    </div>
 
-<hr>
+    <div>
+        <a href="logout.php" class="logout-btn">Logout</a>
+    </div>
 
-<a href="create_post.php">Create Post</a> |
-<a href="view_post.php">View Posts</a> |
-<a href="logout.php">Logout</a>
+</div>
 
+<div class="container">
+
+    <h1 style="text-align:center;">
+        Welcome Back,
+    <?php echo $_SESSION['username']; ?> 👋
+    </h1>
+
+    <p style="text-align:center;margin-top:10px;">
+        Manage your blog posts easily
+    </p>
+
+    <div class="dashboard-cards">
+
+        <div class="dashboard-card">
+            <h3>Create Post</h3>
+            <p>Add a new blog post</p>
+            <br>
+            <a href="create_post.php" class="btn">Create</a>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>View Posts</h3>
+            <p>Manage all posts</p>
+            <br>
+            <a href="view_post.php" class="btn">View</a>
+        </div>
+
+    </div>
+</div>
 </body>
 </html>

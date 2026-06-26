@@ -3,10 +3,8 @@ include("db.php");
 
 $id = $_GET['id'];
 
-$result = mysqli_query($conn,
-"SELECT * FROM posts WHERE id=$id");
-
-$post = mysqli_fetch_assoc($result);
+$result = mysqli_query($conn, "SELECT * FROM posts WHERE id=$id");
+$row = mysqli_fetch_assoc($result);
 
 if(isset($_POST['update'])){
 
@@ -15,9 +13,9 @@ if(isset($_POST['update'])){
 
     mysqli_query($conn,
     "UPDATE posts
-     SET title='$title',
-         content='$content'
-     WHERE id=$id");
+    SET title='$title',
+    content='$content'
+    WHERE id=$id");
 
     header("Location: view_post.php");
 }
@@ -26,36 +24,81 @@ if(isset($_POST['update'])){
 <!DOCTYPE html>
 <html>
 <head>
+
     <title>Edit Post</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+
 </head>
+
 <body>
 
-<h2>Edit Post</h2>
+<div class="navbar">
 
-<form method="POST">
+    <div class="logo">
+        MyBlog
+    </div>
 
-    <label>Title</label><br>
-    <input type="text"
-           name="title"
-           value="<?php echo $post['title']; ?>"
-           required>
+</div>
 
-    <br><br>
+<div class="container">
 
-    <label>Content</label><br>
+    <div class="card-box">
 
-    <textarea name="content"
-              rows="5"
-              cols="40"
-              required><?php echo $post['content']; ?></textarea>
+        <h2>Edit Blog Post</h2>
 
-    <br><br>
+        <form method="POST">
 
-    <button type="submit" name="update">
-        Update Post
-    </button>
+            <label class="form-label">
+                Title
+            </label>
 
-</form>
+            <input
+                type="text"
+                name="title"
+                class="form-control"
+                value="<?php echo $row['title']; ?>"
+                required>
+
+            <br>
+
+            <label class="form-label">
+                Content
+            </label>
+
+            <textarea
+                name="content"
+                rows="8"
+                class="form-control"
+                required><?php echo $row['content']; ?></textarea>
+
+            <br>
+
+            <button
+                type="submit"
+                name="update"
+                class="btn">
+
+                Update Post
+
+            </button>
+
+            <a
+                href="view_post.php"
+                class="btn"
+                style="background:#64748b; margin-left:10px;">
+
+                Cancel
+
+            </a>
+
+        </form>
+
+    </div>
+
+</div>
 
 </body>
 </html>
